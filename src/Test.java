@@ -1,4 +1,3 @@
-
 public class Test {
 
     public static void main(String[] args) {
@@ -71,9 +70,8 @@ public class Test {
         pm.addPhoto(p7);
         pm.addPhoto(p8);
 
-        Album a = new Album("bears", "poop", pm);
+        Album a = new Album("bears", "bear AND grass AND animal", pm);
 
         System.out.println(a.getNbComps());
     }
 }
-

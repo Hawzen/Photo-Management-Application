@@ -31,9 +31,7 @@ public class Album {
 
 		BST<LinkedList<Photo>> bst = manager.getPhotos();
 		// FIXME: Check if all tags are in BST
-		// FIXME: replace "Everything" with BST's linked list
-		bst.findKey("Everything");
-		LinkedList<Photo> everyPhoto = bst.retrieve();
+		LinkedList<Photo> everyPhoto = bst.getAllPhotos();
 		everyPhoto.findFirst();
 		if(everyPhoto.empty()) return everyPhoto;
 

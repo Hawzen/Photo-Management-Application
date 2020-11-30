@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93cf1d4e-e925-463c-846c-27bfe6acf6cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/BST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Photo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Album.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PhotoManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhotoManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1605442348043</updated>
       <workItem from="1605442382274" duration="22616000" />
-      <workItem from="1606714703938" duration="13660000" />
+      <workItem from="1606714703938" duration="14837000" />
     </task>
     <task id="LOCAL-00001" summary="Add getNbComp">
       <created>1606745558954</created>
@@ -73,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606745558954</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add exists method">
+      <created>1606746226966</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606746226966</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -81,7 +87,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add getNbComp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add getNbComp" />
+    <MESSAGE value="Add exists method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add exists method" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1605457816334">
@@ -96,30 +103,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1154" y="389" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1605466549621" />
-    <state x="585" y="109" key="CommitChangelistDialog2" timestamp="1606745557501">
+    <state x="585" y="109" key="CommitChangelistDialog2" timestamp="1606746225962">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606745557501" />
+    <state x="585" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1606746225962" />
     <state x="635" y="229" key="FileChooserDialogImpl" timestamp="1605457812608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="635" y="229" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605457812608" />
-    <state width="1877" height="442" key="GridCell.Tab.0.bottom" timestamp="1606745606727">
+    <state width="1877" height="178" key="GridCell.Tab.0.bottom" timestamp="1606747422983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606745606727" />
-    <state width="1877" height="442" key="GridCell.Tab.0.center" timestamp="1606745606727">
+    <state width="1877" height="178" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606747422983" />
+    <state width="1877" height="178" key="GridCell.Tab.0.center" timestamp="1606747422983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="442" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606745606727" />
-    <state width="1877" height="442" key="GridCell.Tab.0.left" timestamp="1606745606727">
+    <state width="1877" height="178" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606747422983" />
+    <state width="1877" height="178" key="GridCell.Tab.0.left" timestamp="1606747422983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="442" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606745606727" />
-    <state width="1877" height="442" key="GridCell.Tab.0.right" timestamp="1606745606727">
+    <state width="1877" height="178" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606747422983" />
+    <state width="1877" height="178" key="GridCell.Tab.0.right" timestamp="1606747422983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="442" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606745606727" />
+    <state width="1877" height="178" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606747422983" />
     <state width="1877" height="442" key="GridCell.Tab.1.bottom" timestamp="1606745606727">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

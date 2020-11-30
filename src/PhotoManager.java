@@ -8,24 +8,25 @@ public class PhotoManager {
 
 	// Add a photo
 	public void addPhoto(Photo p){
-		// FIXME: Check if the photo exists using BST's linked and dont add it if it does
-		if (exists(p, inverted.getAllPhotos()))
+		if (findll(p, inverted.getAllPhotos()))
 			return;
 
 		LinkedList<String> tags = p.getTags();
 		// FIXME: What if the condition is empty
-		tags.findFirst();
-		boolean end = false;
-		do {
-			if (tags.last()) end = true;
-			String key = tags.retrieve();
-			if (!inverted.findKey(key))
-				inverted.insert(key, new LinkedList<Photo>());
-			inverted.retrieve().insert(p);
-			tags.findNext();
-		} while (!end);
+		if(!tags.empty()){
+			tags.findFirst();
+			while(true) {
+				String key = tags.retrieve();
+				if (!inverted.findKey(key))  // If tag not in bst then add it
+					inverted.insert(key, new LinkedList<Photo>());
+				inverted.retrieve().insert(p);
+				if (tags.last()) break;
+				tags.findNext();
+			}
+		}
 
-		// FIXME: BST should contain linked list
+		// Insert photo in BST's LinkedList
+		inverted.getAllPhotos().insert(p);
 	}
 
 	// Delete a photo
@@ -33,11 +34,10 @@ public class PhotoManager {
 
 		// Search
 		// FIXME replace "Everything" wih BST's linked list
-		inverted.findKey("Everything");
-		LinkedList<Photo> photos = inverted.retrieve();
+		LinkedList<Photo> photos = inverted.getAllPhotos();
 
-		photos.findFirst();
 		if(photos.empty()) return;
+		photos.findFirst();
 		Photo cur = photos.retrieve();
 		while(!cur.path.equals(path)){
 			photos.findNext();
@@ -45,47 +45,51 @@ public class PhotoManager {
 			if(cur == null) return;
 		}
 
+		// Remove Node from BST's list of nodes
+		photos.remove();
+
 		// Delete
 		LinkedList<String> tags = cur.getTags();
 		LinkedList<Photo> tagImgs;
+
+		if(tags.empty()) return;
 		tags.findFirst();
-		// FIXME: Handle empty tags case
 		boolean end = false;
-		do {
-			if (tags.last()) end = true;
+		while (true) {
 			inverted.findKey(tags.retrieve());
 			tagImgs = inverted.retrieve();
 			tagImgs.findFirst();
 			while (true){
 				if (tagImgs.retrieve().equals(cur)) {
 					tagImgs.remove();
-					if (tagImgs.empty())
+					if (tagImgs.empty())  // Delete tag if empty
 						inverted.removeKey(tags.retrieve());
 					break;
 				}
 				tagImgs.findNext();
 			}
+			if (tags.last()) return;
 			tags.findNext();
-		} while (!end);
+		}
 	}
 	// Return the inverted index of all managed photos
 	public BST<LinkedList<Photo>> getPhotos(){
 		return this.inverted;
 	}
 
-	private <T> boolean exists(T p, LinkedList<T> ll) {
+	private <T> boolean findll(T p, LinkedList<T> ll) {
+		// Searched the LinkedList until finding p (and leaves current there). Returns true on success and false otherwise
 		if(ll.empty()) return false;
 
-		boolean flag = false;
 		ll.findFirst();
 		while(true) {
 			if(p.equals(ll.retrieve()))
-				flag = true;
+				return true;
 			if(ll.last()) break;
 			ll.findNext();
 		}
 
-		return flag;
+		return false;
 	}
 
 }
