@@ -1,18 +1,17 @@
 public class PhotoManager {
 
 	// Constructor
-	BST<LinkedList<Photo>> inverted;
+	private BST<LinkedList<Photo>> inverted;
 	public PhotoManager(){
 		inverted = new BST<LinkedList<Photo>>();
 	}
 
 	// Add a photo
 	public void addPhoto(Photo p){
-		if (findll(p, inverted.getAllPhotos()))
+		if (exists(p, inverted.getAllPhotos()))
 			return;
 
 		LinkedList<String> tags = p.getTags();
-		// FIXME: What if the condition is empty
 		if(!tags.empty()){
 			tags.findFirst();
 			while(true) {
@@ -33,13 +32,12 @@ public class PhotoManager {
 	public void deletePhoto(String path){
 
 		// Search
-		// FIXME replace "Everything" wih BST's linked list
 		LinkedList<Photo> photos = inverted.getAllPhotos();
 
 		if(photos.empty()) return;
 		photos.findFirst();
 		Photo cur = photos.retrieve();
-		while(!cur.path.equals(path)){
+		while(!cur.getPath().equals(path)){
 			photos.findNext();
 			cur = photos.retrieve();
 			if(cur == null) return;
@@ -54,7 +52,6 @@ public class PhotoManager {
 
 		if(tags.empty()) return;
 		tags.findFirst();
-		boolean end = false;
 		while (true) {
 			inverted.findKey(tags.retrieve());
 			tagImgs = inverted.retrieve();
@@ -77,13 +74,13 @@ public class PhotoManager {
 		return this.inverted;
 	}
 
-	private <T> boolean findll(T p, LinkedList<T> ll) {
+	public boolean exists(Photo p, LinkedList<Photo> ll) {
 		// Searched the LinkedList until finding p (and leaves current there). Returns true on success and false otherwise
 		if(ll.empty()) return false;
 
 		ll.findFirst();
 		while(true) {
-			if(p.equals(ll.retrieve()))
+			if(p.getPath().equals(ll.retrieve().getPath()))
 				return true;
 			if(ll.last()) break;
 			ll.findNext();
@@ -91,5 +88,4 @@ public class PhotoManager {
 
 		return false;
 	}
-
 }

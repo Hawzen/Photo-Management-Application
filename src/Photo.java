@@ -1,5 +1,5 @@
 public class Photo {
-	String path;
+	private String path;
 	LinkedList<String> tags;
 	// Constructor
 	public Photo(String path, LinkedList<String> tags){

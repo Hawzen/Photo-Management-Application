@@ -2,76 +2,108 @@ public class Test {
 
     public static void main(String[] args) {
 
-        LinkedList<String> tag1 = new LinkedList<String>();
-        tag1.insert("grass");
-        tag1.insert("apple");
-        tag1.insert("animal");
-        tag1.insert("headgehog");
+        /*
+        Tags Diagram (Tags before deletion of any photo):
+                 Animal
+                   +
+                   |
+                   |
+                   |
+                   |
+                   +---------->Creature
+                                 ++
+                                 ||
+                                 ||
+                                 ||
+                                 ||
+                  Big  <-------------------->Fly
+                   +
+                   |
+                   |
+                   |
+                   |
+                   +---->Bug
 
-        LinkedList<String> tag2 = new LinkedList<String>();
-        tag2.insert("bear");
-        tag2.insert("cub");
-        tag2.insert("animal");
-        tag2.insert("grass");
-
-        LinkedList<String> tag3 = new LinkedList<String>();
-        tag3.insert("butterfly");
-        tag3.insert("flower");
-        tag3.insert("insect");
-        tag3.insert("color");
-
-        LinkedList<String> tag4 = new LinkedList<String>();
-        tag4.insert("insect");
-        tag4.insert("butterfly");
-        tag4.insert("flower");
-        tag4.insert("black");
-
-        LinkedList<String> tag5 = new LinkedList<String>();
-        tag5.insert("animal");
-        tag5.insert("fox");
-        tag5.insert("tree");
-        tag5.insert("grass");
-
-        LinkedList<String> tag6 = new LinkedList<String>();
-        tag6.insert("animal");
-        tag6.insert("bear");
-        tag6.insert("panda");
-        tag6.insert("grass");
-
-        LinkedList<String> tag7 = new LinkedList<String>();
-        tag7.insert("animal");
-        tag7.insert("wolf");
-        tag7.insert("sky");
-        tag7.insert("snow");
-
-        LinkedList<String> tag8 = new LinkedList<String>();
-        tag8.insert("animal");
-        tag8.insert("raccoon");
-        tag8.insert("log");
-        tag8.insert("snow");
-
-        Photo p1 = new Photo("hedgehog.jpg", tag1);
-        Photo p2 = new Photo("bear.jpg", tag2);
-        Photo p3 = new Photo("butterfly1.jpg", tag3);
-        Photo p4 = new Photo("butterfly2.jpg", tag4);
-        Photo p5 = new Photo("fox.jpg", tag5);
-        Photo p6 = new Photo("panda.jpg", tag6);
-        Photo p7 = new Photo("wolf.jpg", tag7);
-        Photo p8 = new Photo("raccoon.jpg", tag8);
-
+        */
+        String[][] tags = {{"animal", "creature"}, {"big", "animal"}, {"bug", "fly", "animal"}};
+        String[] names = {"panda.jpg", "bigfoot.png", "butterfly.jpg"};
         PhotoManager pm = new PhotoManager();
 
-        pm.addPhoto(p1);
-        pm.addPhoto(p2);
-        pm.addPhoto(p3);
-        pm.addPhoto(p4);
-        pm.addPhoto(p5);
-        pm.addPhoto(p6);
-        pm.addPhoto(p7);
-        pm.addPhoto(p8);
+        for (int i = 0; i < 3; i++)
+            pm.addPhoto(new Photo(names[i], arrToLL(tags[i])));
 
-        Album a = new Album("bears", "bear AND grass AND animal", pm);
+        Album album;
+        LinkedList<Photo> albumPhotos;
 
-        System.out.println(a.getNbComps());
+        /*
+         * FOR THE FOLLOWING TESTS TO WORK YOU NEED TO FOLLOW THIS:
+         *   The list of photos that belong to the album is determined at the time when
+         *   the method getPhotos is called, not when the album is created.
+         * */
+
+        System.out.println("___________Album 0___________\n\tTest: General condition\n");
+        album = new Album("doesn't matter", "fly", pm);
+        albumPhotos = album.getPhotos();
+        printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+        System.out.println("\n\n\n___________Album 1___________\n\tTest: Tag deletion (empty tags in BST should be removed)\n");
+        album = new Album("doesn't matter", "fly", pm);
+        pm.deletePhoto("butterfly.jpg");
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+        System.out.println("\n\n\n___________Album 2___________\n\tTest: Double addition\n");
+        album = new Album("doesn't matter", "fly", pm);
+        pm.addPhoto(new Photo("butterfly.jpg", new LinkedList<>()));
+        LinkedList<String> fakeList = new LinkedList<>(); fakeList.insert("fly");
+        pm.addPhoto(new Photo("butterfly.jpg", fakeList));
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+        System.out.println("\n\n\n___________Album 3___________\n\tTest: Empty condition\n");
+        album = new Album("doesn't matter", "", pm);
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+
+        System.out.println("\n\n\n___________Album 4___________\n\tTest: Foreign condition\n");
+        album = new Album("doesn't matter", "alien", pm);
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+        System.out.println("\n\n\n___________Album 5___________\n\tTest: Partially foreign condition\n");
+        album = new Album("doesn't matter", "animal AND alien", pm);
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+
+        System.out.println("\n\n\n___________Album 6___________\n\tTest: Addition of a photo with no tags\n");
+        album = new Album("doesn't matter", "", pm);
+        pm.addPhoto(new Photo("Tyrannosaurus_x.jpg", new LinkedList<>()));
+        albumPhotos = album.getPhotos();
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
+        System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
+    }
+
+    private static <T> LinkedList<T> arrToLL(T[] arr){
+        LinkedList<T> list = new LinkedList<T>();
+        for (T el : arr)
+            list.insert(el);
+        return list;
+    }
+
+    private static void printLL(LinkedList<Photo> ll){
+        ll.findFirst();
+        if(ll.empty()) return;
+        while(true){
+            System.out.println(ll.retrieve().getPath());
+            if(ll.last()) return;
+            ll.findNext();
+        }
     }
 }
