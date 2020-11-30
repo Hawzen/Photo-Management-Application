@@ -9,6 +9,8 @@ public class PhotoManager {
 	// Add a photo
 	public void addPhoto(Photo p){
 		// FIXME: Check if the photo exists using BST's linked and dont add it if it does
+		if (exists(p, inverted.getAllPhotos()))
+			return;
 
 		LinkedList<String> tags = p.getTags();
 		// FIXME: What if the condition is empty
@@ -70,4 +72,20 @@ public class PhotoManager {
 	public BST<LinkedList<Photo>> getPhotos(){
 		return this.inverted;
 	}
+
+	private <T> boolean exists(T p, LinkedList<T> ll) {
+		if(ll.empty()) return false;
+
+		boolean flag = false;
+		ll.findFirst();
+		while(true) {
+			if(p.equals(ll.retrieve()))
+				flag = true;
+			if(ll.last()) break;
+			ll.findNext();
+		}
+
+		return flag;
+	}
+
 }

@@ -5,8 +5,6 @@ public class Photo {
 	public Photo(String path, LinkedList<String> tags){
 		this.path = path;
 		this.tags = tags;
-		// FIXME: Remove tag insert
-		this.tags.insert("Everything");
 	}
 
 	// Return the path (full file name) of the photo. A photo is uniquely identified by its path.

@@ -14,6 +14,7 @@ class BSTNode<T> {
 public class BST<T> {
 
 	private BSTNode<T> root, current;
+	private LinkedList<Photo> allPhotos = new LinkedList<Photo>();
 
 	public BST() {
 		current = root = null;
@@ -132,7 +133,10 @@ public class BST<T> {
 		return false; // Not found
 	}
 
-	// FIXME: Add getNbComp
+	public LinkedList<Photo> getAllPhotos() {
+		return allPhotos;
+	}
+
 	public int getNbComp(String k) {
 		int counter = 0;
 		BSTNode<T> p = root;
