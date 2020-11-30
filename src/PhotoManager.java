@@ -5,9 +5,13 @@ public class PhotoManager {
 	public PhotoManager(){
 		inverted = new BST<LinkedList<Photo>>();
 	}
+
 	// Add a photo
 	public void addPhoto(Photo p){
+		// FIXME: Check if the photo exists using BST's linked and dont add it if it does
+
 		LinkedList<String> tags = p.getTags();
+		// FIXME: What if the condition is empty
 		tags.findFirst();
 		boolean end = false;
 		do {
@@ -18,25 +22,32 @@ public class PhotoManager {
 			inverted.retrieve().insert(p);
 			tags.findNext();
 		} while (!end);
+
+		// FIXME: BST should contain linked list
 	}
+
 	// Delete a photo
 	public void deletePhoto(String path){
 
 		// Search
+		// FIXME replace "Everything" wih BST's linked list
 		inverted.findKey("Everything");
 		LinkedList<Photo> photos = inverted.retrieve();
 
 		photos.findFirst();
+		if(photos.empty()) return;
 		Photo cur = photos.retrieve();
 		while(!cur.path.equals(path)){
 			photos.findNext();
 			cur = photos.retrieve();
+			if(cur == null) return;
 		}
 
 		// Delete
 		LinkedList<String> tags = cur.getTags();
 		LinkedList<Photo> tagImgs;
 		tags.findFirst();
+		// FIXME: Handle empty tags case
 		boolean end = false;
 		do {
 			if (tags.last()) end = true;
@@ -46,6 +57,8 @@ public class PhotoManager {
 			while (true){
 				if (tagImgs.retrieve().equals(cur)) {
 					tagImgs.remove();
+					if (tagImgs.empty())
+						inverted.removeKey(tags.retrieve());
 					break;
 				}
 				tagImgs.findNext();

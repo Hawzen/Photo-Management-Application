@@ -5,6 +5,7 @@ public class Photo {
 	public Photo(String path, LinkedList<String> tags){
 		this.path = path;
 		this.tags = tags;
+		// FIXME: Remove tag insert
 		this.tags.insert("Everything");
 	}
 

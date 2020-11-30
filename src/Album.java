@@ -12,24 +12,30 @@ public class Album {
 	public String getName(){
 		return this.name;
 	}
+
 	// Return the condition associated with the album
 	public String getCondition(){
 		return this.condition;
 	}
+
 	// Return the manager
 	public PhotoManager getManager(){
 		return this.manager;
 	}
+
 	// Return all photos that satisfy the album condition
 	public LinkedList<Photo> getPhotos(){
 		// Create a linked list of tags
 		LinkedList<Photo> output = new LinkedList<Photo>();
-		String[] tags = this.condition.split("AND");
+		String[] tags = this.condition.split(" AND ");
 
 		BST<LinkedList<Photo>> bst = manager.getPhotos();
+		// FIXME: Check if all tags are in BST
+		// FIXME: replace "Everything" with BST's linked list
 		bst.findKey("Everything");
 		LinkedList<Photo> everyPhoto = bst.retrieve();
 		everyPhoto.findFirst();
+		if(everyPhoto.empty()) return everyPhoto;
 
 		Photo cur;
 		boolean inTags, inTag; // inTags: Photo exists in all relevant tags, inTag: photo is in tagImgs

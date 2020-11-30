@@ -2,6 +2,7 @@ class BSTNode<T> {
 	public String key;
 	public T data;
 	public BSTNode<T> left, right;
+	// FIXME: Add Linkedlist of all photos
 
 	public BSTNode(String key, T data) {
 		this.key = key;
@@ -130,4 +131,6 @@ public class BST<T> {
 
 		return false; // Not found
 	}
+
+	// FIXME: Add getNbComp
 }
