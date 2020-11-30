@@ -72,8 +72,16 @@ public class Album {
 		} while (!end);
 		return output;
 	}
+
 	// Return the number of tag comparisons used to find all photos of the album
 	public int getNbComps(){
-		return 0;
+		BST<LinkedList<Photo>> bst = manager.getPhotos();
+		int counter = 0;
+
+		String[] tags = this.condition.split(" AND ");
+		for (int i=0; i < tags.length; i++)
+			counter += bst.getNbComp(tags[i]);
+
+		return counter;
 	}
 }

@@ -133,4 +133,20 @@ public class BST<T> {
 	}
 
 	// FIXME: Add getNbComp
+	public int getNbComp(String k) {
+		int counter = 0;
+		BSTNode<T> p = root;
+		while (p != null) {
+			counter++;
+			current = p;
+			if (k.compareTo(p.key)==0) {
+				return counter;
+			} else if (k.compareTo(p.key) < 0) {
+				p = p.left;
+			} else {
+				p = p.right;
+			}
+		}
+		return counter;
+	}
 }
