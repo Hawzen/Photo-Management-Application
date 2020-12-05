@@ -23,7 +23,6 @@ public class Test {
                    |
                    |
                    +---->Bug
-
         */
         String[][] tags = {{"animal", "creature"}, {"big", "animal"}, {"bug", "fly", "animal"}};
         String[] names = {"panda.jpg", "bigfoot.png", "butterfly.jpg"};
@@ -44,7 +43,7 @@ public class Test {
         System.out.println("___________Album 0___________\n\tTest: General condition\n");
         album = new Album("doesn't matter", "fly", pm);
         albumPhotos = album.getPhotos();
-        printLL(albumPhotos);
+        System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
         System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
 
         System.out.println("\n\n\n___________Album 1___________\n\tTest: Tag deletion (empty tags in BST should be removed)\n");
@@ -68,7 +67,6 @@ public class Test {
         albumPhotos = album.getPhotos();
         System.out.printf("Photos found using the condition \"%s\" are:\n", album.getCondition()); printLL(albumPhotos);
         System.out.printf("Number of comparisons of condition \"%s\" is %d", album.getCondition(), album.getNbComps());
-
 
         System.out.println("\n\n\n___________Album 4___________\n\tTest: Foreign condition\n");
         album = new Album("doesn't matter", "alien", pm);
