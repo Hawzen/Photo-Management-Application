@@ -1,4 +1,4 @@
-*/.idea/*
-*/output/*
-*/bin/*
+**/.idea/
+**/output/
+**/bin/
 debug.log
